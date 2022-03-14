@@ -1,0 +1,53 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Product Detail{% endblock %}
+{% block PageTitle %}Product Details Page{% endblock %}
+{% block Chemin %}<a href="{{ path('app_product_index') }}">Shop<span class="lnr lnr-arrow-right"></span></a>
+<a href="{{ path('app_product_show', {'id': product.id}) }}">{{product.name}}</a>{% endblock %}
+
+{% block body %}
+
+    <div class="product_image_area mb-5 pt-0">
+		<div class="container">
+			<div class="row s_product_inner">
+				<div class="col-lg-6">
+					<div class="s_Product_carousel">
+						<div class="single-prd-item">
+							<img class="img-fluid" src="{{asset('assets/img/product/')}}{{product.image}}" alt="">
+						</div>
+						<div class="single-prd-item">
+							<img class="img-fluid" src="img/category/s-p1.jpg" alt="">
+						</div>
+						<div class="single-prd-item">
+							<img class="img-fluid" src="img/category/s-p1.jpg" alt="">
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-5 offset-lg-1">
+					<div class="s_product_text">
+						<h3>{{ product.name }}</h3>
+						<h2>{{ product.price }}€</h2>
+						<ul class="list">
+							<li><a class="active" href="{{ path('app_product_category', {'category': product.category}) }}"><span>Category</span> : {{ product.category }}</a></li>
+							<li><a href="#"><span>Availibility</span> : {{ product.available ? 'In Stock' : 'Sold Out' }}</a></li>
+						</ul>
+						<p>{{ product.description }}</p>
+						<div class="product_count">
+							<label for="qty">Quantity:</label>
+							<input type="text" name="qty" id="sst" maxlength="1" value="1" title="Quantity:" class="input-text qty">
+							<button
+							 class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
+							<button 
+							 class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+						</div>
+						<div class="card_area d-flex align-items-center">
+							{% if product.available %}
+							<a class="primary-btn" href="{{ path('app_cart_add', {id:product.id}) }}">Add to Cart</a>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

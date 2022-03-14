@@ -1,0 +1,15 @@
+.label-register {
+    margin-left: -81px;
+}
+
+.label-register label {
+    margin-right: 20px;
+}
+
+.container-register span {
+    padding-right: 92px;
+}
+
+.btn_logout {
+    margin-top: 50px;
+}

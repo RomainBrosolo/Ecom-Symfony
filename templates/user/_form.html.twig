@@ -1,0 +1,11 @@
+<div class="container"> 
+{{ form_start(form) }}
+    <div class="form-group">{{ form_row(form.email, {'attr':{'class':'form-control'}}) }}
+    <div class="form-group">{{ form_row(form.password, {'attr':{'class':'form-control'}}) }}
+    <div class="form-group">{{ form_row(form.firstname, {'attr':{'class':'form-control'}}) }}
+    <div class="form-group">{{ form_row(form.lastname, {'attr':{'class':'form-control'}}) }}
+    <div class="form-group">{{ form_row(form.address, {'attr':{'class':'form-control'}}) }}
+    <div class="form-group">{{ form_row(form.phone, {'attr':{'class':'form-control'}}) }}
+    <button class="btn btn-info mt-3">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+</div>

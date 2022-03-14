@@ -1,0 +1,76 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Shop Sneakers{% endblock %}
+{% block PageTitle %}Shop Sneakers{% endblock %}
+{% block Chemin %}<a href="#">Shop</a>{% endblock %}
+
+{% block body %}
+    <div class="container">
+		<div class="row">
+			<div class="col-xl-3 col-lg-4 col-md-5">
+				<div class="sidebar-categories">
+					<div class="head">Browse Categories</div>
+					<ul class="main-categories">
+						<li class="main-nav-list"><a href="{{ path('app_product_index') }}"><span
+								 class="lnr lnr-arrow-right"></span>All products<span class="number"></span></a>
+						</li>
+						<li class="main-nav-list"><a data-toggle="collapse" href="#shoes" aria-expanded="false" aria-controls="shoes"><span
+								 class="lnr lnr-arrow-right"></span>Shoes<span class="number"></span></a>
+							<ul class="collapse" id="shoes" data-toggle="collapse" aria-expanded="false" aria-controls="shoes">
+								<li class="main-nav-list child"><a href="{{ path('app_product_category', {'category': 'sneakers'}) }}">Sneakers<span class="number"></span></a></li>
+								<li class="main-nav-list child"><a href="{{ path('app_product_category', {'category': 'football'}) }}">Football<span class="number"></span></a></li>
+							</ul>
+						</li>
+
+						<li class="main-nav-list"><a data-toggle="collapse" href="#accessories" aria-expanded="false" aria-controls="accessories"><span
+								 class="lnr lnr-arrow-right"></span>Accessories<span class="number"></span></a>
+							<ul class="collapse" id="accessories" data-toggle="collapse" aria-expanded="false" aria-controls="accessories">
+								<li class="main-nav-list child"><a href="{{ path('app_product_category', {'category': 'caps'}) }}">Caps<span class="number"></span></a></li>
+								<li class="main-nav-list child"><a href="{{ path('app_product_category', {'category': 'bags'}) }}">Bags<span class="number"></span></a></li>
+							</ul>
+						</li>
+						<li class="main-nav-list"><a data-toggle="collapse" href="#clothes" aria-expanded="false" aria-controls="clothes"><span
+								 class="lnr lnr-arrow-right"></span>Clothes<span class="number"></span></a>
+							<ul class="collapse" id="clothes" data-toggle="collapse" aria-expanded="false" aria-controls="clothes">
+								<li class="main-nav-list child"><a href="{{ path('app_product_category', {'category': 'sweat'}) }}">Sweat<span class="number"></span></a></li>
+								<li class="main-nav-list child"><a href="{{ path('app_product_category', {'category': 't-shirt'}) }}">T-shirt<span class="number"></span></a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-xl-9 col-lg-8 col-md-7">
+				<h4>{{ products | length}} results</h4>
+				<!-- Start Best Seller -->
+				<section class="lattest-product-area pb-40 category-list">
+					<div class="row">
+                    {% for product in products %}
+                        <div class="col-lg-4 col-md-6">
+							<div class="single-product">
+								<a href="{{ path('app_product_show', {'id': product.id}) }}"><img class="img-fluid" src="{{asset('assets/img/product/')}}{{product.image}}" alt=""></a>
+								<div class="product-details">
+									<h6>{{product.name}}</h6>
+									<div class="price">
+										<h6>{{product.price}}€</h6>
+									</div>
+									<div class="prd-bottom">
+
+										<a href="{{ path('app_cart_add', {id:product.id}) }}" class="social-info">
+											<span class="ti-bag"></span>
+											<p class="hover-text">add to bag</p>
+										</a>
+										<a href="{{ path('app_product_show', {'id': product.id}) }}" class="social-info">
+											<span class="lnr lnr-move"></span>
+											<p class="hover-text">view more</p>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+                    {% endfor %}
+				</section>
+				<!-- End Best Seller -->
+			</div>
+		</div>
+	</div>
+{% endblock %}

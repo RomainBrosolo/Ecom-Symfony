@@ -1,0 +1,11 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Nouveau Produit{% endblock %}
+
+{% block body %}
+    <div class="container">
+    {{ include('product/_form.html.twig') }}
+
+    <a href="{{ path('app_admin') }}" class="primary-btn mt-2">Retour liste</a>
+    </div>
+{% endblock %}

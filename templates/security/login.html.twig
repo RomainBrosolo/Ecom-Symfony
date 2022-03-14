@@ -1,0 +1,65 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}My Account{% endblock %}
+{% block PageTitle %}My Account{% endblock %}
+{% block Chemin %}<a href="{{ path('app_login') }}">My Account</a>{% endblock %}
+
+{% block body %}
+    <section class="login_box_area section_gap">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="login_box_img">
+						<img class="img-fluid" src="{{asset('assets/img/login.jpg')}}" alt="">
+						<div class="hover">
+							<h4>New to our website?</h4>
+							<p>There are advances being made in science and technology everyday, and a good example of this is the</p>
+							<a class="primary-btn" href="{{ path('app_register') }}">Create an Account</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="login_form_inner">
+						<form class="row login_form" method="post" id="contactForm" novalidate="novalidate">
+                            {% if error %}
+                                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                            {% endif %}
+
+                            {% if app.user %}
+                                <div class="mb-3">
+                                    <h2 class="mb-5">You are logged in as <span style="color:green">{{ app.user.firstname }} {{ app.user.lastname }}</span></h2>
+                                    <h4>Email : {{ app.user.email }}</h4>
+
+                                    <a href="{{ path('app_logout') }}" class="primary-btn btn_logout">Logout</a>
+                                    <a href="{{ path('app_edit_profil', {'id': app.user.id}) }}" class="primary-btn btn_logout">Edit profil</a>
+                                    
+                                </div>
+                            {% else %}
+                            <h3>Log in to enter</h3>
+                            <div class="col-md-12 form-group">
+								<input type="email" class="form-control" value="{{ last_username }}" name="email" id="inputEmail" placeholder="Email" autocomplete="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" required>
+							</div>
+							<div class="col-md-12 form-group">
+								<input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" autocomplete="current-password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" required>
+                                <input type="hidden" name="_csrf_token"
+                                    value="{{ csrf_token('authenticate') }}"
+                                >
+							</div>
+							<div class="col-md-12 form-group">
+								<div class="creat_account">
+									<input type="checkbox" id="f-option2" name="selector">
+									<label for="f-option2">Keep me logged in</label>
+								</div>
+							</div>
+							<div class="col-md-12 form-group">
+								<button type="submit" value="submit" class="primary-btn">Log In</button>
+							</div>
+                            {% endif %}
+							
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

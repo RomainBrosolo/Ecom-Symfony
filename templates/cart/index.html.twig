@@ -1,0 +1,128 @@
+{% extends 'template.html.twig' %}
+{% block title %}Shipping Cart{% endblock %}
+{% block PageTitle %}Shipping Cart{% endblock %}
+{% block Chemin %}<a href="#">Shipping Cart</a>{% endblock %}
+
+{% block body %}
+<section class="cart_area pt-0" >
+        <div class="container">
+            <div class="cart_inner">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for element in data %}
+                            <tr>
+                                <td>
+                                    <div class="media">
+                                        <div class="d-flex">
+                                            <a href="{{ path('app_product_show',{id:element.product.id})}}"><img src="{{asset('assets/img/product/')}}{{element.product.image}}" alt="{{element.product.name}}" style="height:100px; width:100px"></a>
+                                        </div>
+                                        <div class="media-body">
+                                            <p>{{element.product.name}}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <h5>{{element.product.price}}€</h5>
+                                </td>
+                                <td>
+                                    <div class="product_count">
+                                        <input type="text" name="qty" id="sst" maxlength="12" value="{{element.quantity}}" title="Quantity:"
+                                            class="input-text qty">
+                                        <a href="{{path('app_cart_add',{id: element.product.id})}}"><button 
+                                            class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button></a>
+                                        <a href="{{path('app_cart_remove',{id: element.product.id})}}"><button
+                                            class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <h5>{{element.quantity * element.product.price}}€</h5>
+                                </td>
+                                <td>
+                                    <a href="{{path('app_cart_delete',{id: element.product.id})}}" class="btn btn-danger">x</a>
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr> <td colspan="5" class="text-center">Your cart is empty</td></tr>
+                            {% endfor %}
+                            {% if app.session.get('panier') %}
+                            <tr class="bottom_button">
+                                <td>
+                                    <a class="gray_btn" href="{{path('app_cart')}}">Update Cart</a>
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    <div class="cupon_text d-flex align-items-center">
+                                        <input type="text" placeholder="Coupon Code">
+                                        <a class="primary-btn" href="#">Apply</a>
+                                        
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="shipping_area">
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    <h5>Shipping</h5>
+                                </td>
+                                <td>
+                                    <h5>5€</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    <h5>Total</h5>
+                                </td>
+                                <td>
+                                    <h5>{{total + 5}}€</h5>
+                                </td>
+                            </tr>
+                            
+                            <tr class="out_button_area">
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    <div class="checkout_btn_inner d-flex align-items-center">
+                                        <a class="gray_btn  btn btn-info" href="{{path('app_product_index')}}">Continue Shopping</a>
+                                        <a class="primary-btn" href="{{path('app_cart_checkout')}}">Proceed to checkout</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
